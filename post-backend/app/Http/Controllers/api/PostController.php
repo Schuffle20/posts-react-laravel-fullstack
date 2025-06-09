@@ -58,6 +58,26 @@ class PostController
 
     }
 
+    public function search(Request $request)
+    {
+
+        $keyword = $request->input('q');
+        // For empty keyword, return all posts or empty array
+        if (empty($keyword)) {
+            return response()->json(Post::all());
+        }
+
+        $posts = Post::where('title', 'LIKE', "%{$keyword}%")
+        ->orWhere('description', 'LIKE', "%{$keyword}%")
+        ->get();
+
+        return response()->json([
+            'success' => true,
+            'data' => $posts, // This will always be a collection (array-like)
+            'message' => $posts->isEmpty() ? 'No posts found' : 'Posts retrieved successfully'
+        ]);
+    }
+
     /**
      * Show the form for editing the specified resource.
      */

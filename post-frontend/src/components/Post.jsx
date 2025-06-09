@@ -1,19 +1,19 @@
 import React from 'react'
 import { NavLink } from 'react-router-dom';
 
-const Post = ({post, handleDelete}) => {
+const Post = ({ filteredPost, handleDelete }) => {
   return (
     <div>
-      <h4>Post Title - {post.title}</h4>
-      <p>Post Id - {post.id}</p>
-      <p>Post Description - {post.description}</p>
+      <h4>Post Title - {filteredPost.title}</h4>
+      <p>Post Id - {filteredPost.id}</p>
+      <p>Post Description - {filteredPost.description}</p>
       <button>
-        <NavLink to={`/edit-post/${post.id}`}>Edit</NavLink>
+        <NavLink to={`/edit-post/${filteredPost.id}`}>Edit</NavLink>
       </button>
-      <button onClick={() => handleDelete(post.id)}>Delete</button>
+      <button onClick={() => handleDelete(filteredPost.id)}>Delete</button>
       <hr></hr>
     </div>
   );
-}
+};
 
 export default Post

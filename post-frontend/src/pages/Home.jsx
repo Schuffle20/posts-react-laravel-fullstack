@@ -4,6 +4,7 @@ import axios from 'axios'
 
 const Home = () => {
     const [posts, setPosts] = useState([]);
+    const [filteredPosts, setFilteredPosts] = useState([]);
     const [loading, setLoading] = useState(true);
 
     // axios
@@ -25,6 +26,7 @@ const Home = () => {
               "http://127.0.0.1:8000/api/posts/"
             );
             setPosts(response.data)
+            setFilteredPosts(response.data)
         }catch(err){
             alert("Error catching posts:", err.message)
         }finally{
@@ -51,9 +53,14 @@ const Home = () => {
 
 
   return (
-    <PostSection posts={posts} loading={loading} handleDelete={handleDelete}/>
-   
-  )
+    <PostSection
+      filteredPosts={filteredPosts}
+      setFilteredPosts={setFilteredPosts}
+      posts={posts}
+      loading={loading}
+      handleDelete={handleDelete}
+    />
+  );
 }
 
 export default Home
